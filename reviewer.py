@@ -1,10 +1,14 @@
 import json
 import os
+import weave
 from dotenv import load_dotenv
 from anthropic import Anthropic
 
 load_dotenv()
 client = Anthropic()
+
+# Runs once on import; Python module caching prevents re-runs
+_weave_client = weave.init("invoice-review-poc")
 
 # ── Rule definitions ──────────────────────────────────────────────────────────
 # These are passed into review() so they can be swapped per client in the future.
@@ -62,6 +66,7 @@ Reasoning: No information about what was done.
 
 # ── Prompt builder ────────────────────────────────────────────────────────────
 
+@weave.op()
 def _build_system_prompt(rules: str, prompt_version: str) -> str:
     """Assemble the system prompt for the given version."""
     base = f"""You are a legal invoice reviewer. Your job is to assess whether a single billing line item violates any of the billing rules listed below.
@@ -122,6 +127,7 @@ def _validate_quoted_text(result: dict, narrative: str) -> dict:
     return result
 
 
+@weave.op()
 def review(line_item: dict, rules: str, client_id: str = "default", prompt_version: str = "v1") -> dict:
     """
     Review a single invoice line item against the provided billing rules.
@@ -222,3 +228,4 @@ if __name__ == "__main__":
         print(f"\n--- {result['line_id']} ---")
         print(json.dumps(result, indent=2))
     print("\n" + "=" * 50 + "\nDone.")
+    print(f"\nWeave project: https://wandb.ai/{_weave_client.entity}/{_weave_client.project}/weave/calls")
