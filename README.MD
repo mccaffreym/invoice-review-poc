@@ -91,6 +91,7 @@ Scoping decisions, with reasons:
 .
 ├── reviewer.py                     # Core reviewer: review(line_item, rules, client_id)
 ├── run_eval.py                     # Runs reviewer over the eval set, scores P/R/F1
+├── weave_eval.py                   # Weave-native eval: Model classes, scorer, Evaluation runner
 ├── invoice_eval_set_v1_2.xlsx      # Labelled ground truth (v1.2) + change log
 ├── invoice_eval_set_v1_2_with_v3_results.xlsx  # v1, v2, v3 predictions side-by-side
 ├── design-memos/
