@@ -52,6 +52,8 @@ Three prompt versions, each with a single isolated change so cause-of-effect is 
 | v2 | + 3 few-shot examples teaching contextual justification | 93.3% | Fixed 3 v1 FPs but introduced 2 new FPs on rules the examples didn't touch — *prompt changes propagate beyond their target* |
 | v3 | + verbatim quote requirement (`quoted_text` per flag) | 90.0% | 100% verbatim quote rate; zero false positives across all 30 lines; 3 false negatives on `block_billing` (the rule resists span-grounding because the violation is structural, not local) |
 
+_Numbers are from a single run with temperature=0. Re-runs show ±1 line variance on borderline cases (L021, L030, L003 in particular) — temperature=0 is a "most likely token" guarantee, not bit-level reproducibility. Weave dashboards show live eval runs and capture this variance directly._
+
 There is no winner. v2 has the highest F1; v3 has the cleanest verifiability and zero FPs but lower recall. Choosing between them is a product decision: **which failure mode is more costly?** In legal billing, false negatives (money walks out unflagged) erode trust faster than false positives (annoying but recoverable).
 
 ### Guardrail at two layers
@@ -140,7 +142,7 @@ In priority order:
 
 - **Model:** Claude Haiku 4.5 (`claude-haiku-4-5`) via Anthropic API
 - **Language:** Python 3.13
-- **Eval tracking:** Excel (planned migration to Weights & Biases Weave)
+- **Eval tracking:** Excel + Weights & Biases Weave (tracing and evaluation)
 - **Workflow:** Claude Code for scaffolding, Claude (chat) for design decisions and review
 
 ---
