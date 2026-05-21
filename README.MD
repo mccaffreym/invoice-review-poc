@@ -54,6 +54,8 @@ Three prompt versions, each with a single isolated change so cause-of-effect is 
 
 _Numbers are from a single run with temperature=0. Re-runs show ±1 line variance on borderline cases (L021, L030, L003 in particular) — temperature=0 is a "most likely token" guarantee, not bit-level reproducibility. Weave dashboards show live eval runs and capture this variance directly._
 
+![Weave traces for the invoice reviewer eval runs](assets/weave_traces.png)
+
 There is no winner. v2 has the highest F1; v3 has the cleanest verifiability and zero FPs but lower recall. Choosing between them is a product decision: **which failure mode is more costly?** In legal billing, false negatives (money walks out unflagged) erode trust faster than false positives (annoying but recoverable).
 
 ### Guardrail at two layers
