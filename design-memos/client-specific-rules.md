@@ -53,4 +53,4 @@ This is the smallest end-to-end slice that proves the architecture rather than t
 
 ---
 
-*Memo written as a design exercise alongside the POC build. RAG implementation deferred; the architectural hooks (`client_id` parameter, schema with `source` field) are in place if and when this is built.*
+*RAG implementation deferred; the architectural hooks (`client_id` parameter, schema with `source` field) are in place if and when this is built.*

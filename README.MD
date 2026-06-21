@@ -1,6 +1,6 @@
 # Invoice Review Assistant — POC
 
-An AI-powered legal invoice line-item reviewer. Built as a learning project to work through the full AI product lifecycle at small scale: rules definition, labelled eval sets, prompt iteration with measured trade-offs, and grounded outputs.
+An AI-powered legal invoice line-item reviewer. A small-scale build working through the full AI product lifecycle: rules definition, labelled eval sets, prompt iteration with measured trade-offs, and grounded outputs.
 
 > ⚠️ **POC, not production.** Single-line review only. 30-line eval set. No RAG, no multi-document reasoning, no UI. The point of this repo is the *methodology*, not the artifact.
 
@@ -91,14 +91,17 @@ Scoping decisions, with reasons:
 
 ```
 .
-├── reviewer.py                     # Core reviewer: review(line_item, rules, client_id)
-├── run_eval.py                     # Runs reviewer over the eval set, scores P/R/F1
-├── weave_eval.py                   # Weave-native eval: Model classes, scorer, Evaluation runner
-├── invoice_eval_set_v1_2.xlsx      # Labelled ground truth (v1.2) + change log
-├── invoice_eval_set_v1_2_with_v3_results.xlsx  # v1, v2, v3 predictions side-by-side
+├── reviewer.py                                  # Core reviewer: review(line_item, rules, client_id)
+├── run_eval.py                                  # Runs reviewer over the eval set, scores P/R/F1
+├── weave_eval.py                                # Weave-native eval: Model classes, scorer, Evaluation runner
+├── invoice_eval_set_v1.xlsx                     # Labelled ground truth (v1.1 + v1.2 sheets, rules reference, change log)
+├── invoice_eval_set_v1_with_v1_results.xlsx     # v1 eval set scored with the v1 prompt
+├── invoice_eval_set_v1.2_with_v1_results.xlsx   # v1.2 eval set scored with the v1 prompt
+├── invoice_eval_set_v1.2_with_v2_results.xlsx   # v1.2 eval set scored with the v2 prompt
+├── invoice_eval_set_v1.2_with_v3_results.xlsx   # v1.2 eval set scored with the v3 prompt
 ├── design-memos/
-│   └── client-specific-rules.md    # 1-page memo: how the reviewer would extend with RAG
-└── README.md
+│   └── client-specific-rules.md                 # 1-page memo: how the reviewer would extend with RAG
+└── README.MD
 ```
 
 The xlsx files are the most useful place to start if you want to see how the work actually went. The `Change Log` tab in the eval set explains the v1.1 → v1.2 reasoning. The results file has every line, every prediction across three prompt versions, every quote.
@@ -150,4 +153,4 @@ In priority order:
 
 ---
 
-*Built by Mark McCaffrey as a learning project. Feedback welcome.*
+*Built by Mark McCaffrey. Feedback welcome.*
